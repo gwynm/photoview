@@ -33,7 +33,7 @@ const LogoHeader = () => {
         alt="photoview logo"
       />
       <h1 className="text-3xl text-center mt-4">
-        {t('login_page.welcome', 'Welcome to Photoview')}
+        {t('login_page.welcome', 'Welcome to Photoview-G')}
       </h1>
     </div>
   )

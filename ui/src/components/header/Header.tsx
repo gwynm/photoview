@@ -22,7 +22,7 @@ const Header = () => {
           alt="logo"
         />
         <span className="hidden lg:block ml-2 text-2xl font-light">
-          Photoview 1
+          Photoview G002
         </span>
       </h1>
       {authToken() ? <SearchBar /> : null}
