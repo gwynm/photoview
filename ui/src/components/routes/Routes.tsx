@@ -16,6 +16,11 @@ import AuthorizedRoute from './AuthorizedRoute'
 const AlbumsPage = React.lazy(
   () => import('../../Pages/AllAlbumsPage/AlbumsPage')
 )
+
+const PhotoframePage = React.lazy(
+  () => import('../../Pages/PhotoframePage/PhotoframePage')
+)
+
 const AlbumPage = React.lazy(() => import('../../Pages/AlbumPage/AlbumPage'))
 const TimelinePage = React.lazy(
   () => import('../../Pages/TimelinePage/TimelinePage')
@@ -81,6 +86,10 @@ const Routes = () => {
     {
       path: '/albums',
       element: authorized(<AlbumsPage />),
+    },
+    {
+      path: '/photoframe',
+      element: authorized(<PhotoframePage />),
     },
     {
       path: '/album/:id',
