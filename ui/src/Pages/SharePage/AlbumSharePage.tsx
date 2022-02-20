@@ -82,6 +82,7 @@ export const SHARE_ALBUM_QUERY = gql`
             latitude
             longitude
           }
+          imageDescription
         }
       }
     }

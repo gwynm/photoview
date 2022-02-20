@@ -117,6 +117,11 @@ func (p internalExifParser) ParseExif(media_path string) (returnExif *models.Med
 		}
 	}
 
+	imageDescription, err := p.readStringTag(exifTags, exif.ImageDescription, media_path)
+	if err == nil {
+		newExif.ImageDescription = imageDescription
+	}
+
 	flash, err := p.readIntegerTag(exifTags, exif.Flash, media_path)
 	if err == nil {
 		flash64 := int64(*flash)

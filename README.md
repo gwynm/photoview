@@ -38,6 +38,7 @@ Password: **demo**
   - [Local setup](#local-setup)
   - [Start API server](#start-api-server)
   - [Start UI server](#start-ui-server)
+  - [Hints](#hints)
 - [Sponsors](#sponsors)
 
 ## Main features
@@ -174,6 +175,13 @@ npm start
 
 The site can now be accessed at [localhost:1234](http://localhost:1234).
 And the graphql playground at [localhost:4001](http://localhost:4001)
+
+### Hints
+
+Regenerate types with `npm run genSchemaTypes`
+Regenerate go code with `go get github.com/99designs/gqlgen/cmd@v0.13.0 && go run github.com/99designs/gqlgen`
+Run tests with eg `go test scanner/exif/exif_test.go -v -filesystem true`
+
 
 ## Sponsors
 

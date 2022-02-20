@@ -34,8 +34,9 @@ func Search(db *gorm.DB, query string, userID int, _limitMedia *int, _limitAlbum
 	}
 
 	err := db.Joins("Album").
+		Joins("LEFT JOIN media_exif ON media.exif_id = media_exif.id").
 		Where("EXISTS (?)", userSubquery).
-		Where("LOWER(media.title) LIKE ? OR LOWER(media.path) LIKE ?", wildQuery, wildQuery).
+		Where("LOWER(media.title) LIKE ? OR LOWER(media.path) LIKE ? OR LOWER(media_exif.imageDescription) LIKE ?", wildQuery, wildQuery, wildQuery).
 		Clauses(clause.OrderBy{
 			Expression: clause.Expr{
 				SQL:                "(CASE WHEN LOWER(media.title) LIKE ? THEN 2 WHEN LOWER(media.path) LIKE ? THEN 1 END) DESC",

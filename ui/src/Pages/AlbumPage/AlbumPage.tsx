@@ -55,6 +55,10 @@ const ALBUM_QUERY = gql`
           url
         }
         favorite
+        exif {
+          imageDescription
+          dateShot
+        }
       }
     }
   }

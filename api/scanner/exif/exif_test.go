@@ -60,6 +60,7 @@ func TestExifParsers(t *testing.T) {
 				assert.EqualValues(t, *exif.Orientation, 1)
 				assert.InDelta(t, *exif.GPSLatitude, 65.01681388888889, 0.0001)
 				assert.InDelta(t, *exif.GPSLongitude, 25.466863888888888, 0.0001)
+				assert.EqualValues(t, "This is a photo of a bird", *exif.ImageDescription)
 			},
 		},
 		{
@@ -78,6 +79,7 @@ func TestExifParsers(t *testing.T) {
 
 	for _, p := range parsers {
 		for _, img := range images {
+
 			t.Run(fmt.Sprintf("%s:%s", p.name, path.Base(img.path)), func(t *testing.T) {
 
 				if p.name == "external" {

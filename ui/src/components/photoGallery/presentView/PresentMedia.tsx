@@ -7,6 +7,7 @@ import {
   ProtectedVideo,
   ProtectedVideoProps_Media,
 } from '../ProtectedMedia'
+import { sidebarMediaQuery_media_exif } from '../../sidebar/MediaSidebar/__generated__/sidebarMediaQuery'
 
 const StyledPhoto = styled(ProtectedImage)`
   position: absolute;
@@ -32,6 +33,7 @@ export interface PresentMediaProps_Media extends ProtectedVideoProps_Media {
     __typename: 'MediaURL'
     url: string
   }
+  exif?: sidebarMediaQuery_media_exif | null
 }
 
 type PresentMediaProps = {

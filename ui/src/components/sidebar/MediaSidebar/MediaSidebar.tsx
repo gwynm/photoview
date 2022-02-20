@@ -79,6 +79,7 @@ export const SIDEBAR_MEDIA_QUERY = gql`
           latitude
           longitude
         }
+        imageDescription
       }
       album {
         id

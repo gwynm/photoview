@@ -26,7 +26,7 @@ const ExifDetails = ({ media }: ExifDetailsProps) => {
     }
 
     const exifKeys = Object.keys(exifName).filter(
-      x => mediaExif[x] !== null && x != '__typename'
+      x => mediaExif[x] !== null && mediaExif[x] !== undefined && x != '__typename'
     )
 
     const exif = exifKeys.reduce((prev, curr) => {
@@ -131,6 +131,7 @@ const exifNameLookup = (t: TranslationFn): { [key: string]: string } => ({
   focalLength: t('sidebar.media.exif.name.focal_length', 'Focal length'),
   flash: t('sidebar.media.exif.name.flash', 'Flash'),
   coordinates: t('sidebar.media.exif.name.coordinates', 'Coordinates'),
+  imageDescription: t('sidebar.media.exif.name.imageDescription', 'Description'),
 })
 
 // From https://exiftool.org/TagNames/EXIF.html

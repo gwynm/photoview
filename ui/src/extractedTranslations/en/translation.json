@@ -313,7 +313,8 @@
           "focal_length": "Focal length",
           "iso": "ISO",
           "lens": "Lens",
-          "maker": "Maker"
+          "maker": "Maker",
+          "imageDescription": "Description"
         }
       }
     },

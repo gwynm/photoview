@@ -15,6 +15,17 @@ const StyledContainer = styled.div`
   z-index: 100;
 `
 
+const PresentImageDescription = styled.div`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color:rgba(0,0,0,0.3);
+  color:#ffffff;
+  text-align:center;
+  z-index:10;
+`
+
+
 const PreventScroll = createGlobalStyle`
   * {
     overflow: hidden !important;
@@ -66,6 +77,23 @@ const PresentView = ({
     }
   })
 
+  const formattedDate = (inDate: string | null | undefined): string => {
+    const dateFormatterOptions: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }
+    const dateFormatter = new Intl.DateTimeFormat(
+      'en-US',
+      dateFormatterOptions
+    )
+    if (inDate) {
+      return dateFormatter.format(new Date(inDate))
+    } else {
+      return 'Unknown date'
+    }
+  }
+  
   return (
     <StyledContainer {...className}>
       <PreventScroll />
@@ -73,7 +101,13 @@ const PresentView = ({
         dispatchMedia={dispatchMedia}
         disableSaveCloseInHistory
       >
-        <PresentMedia media={activeMedia} imageLoaded={imageLoaded} />
+        <div>
+          <PresentImageDescription>
+            {formattedDate(activeMedia.exif?.dateShot)}
+            {activeMedia.exif && activeMedia.exif.imageDescription ? ": " + activeMedia.exif.imageDescription : ""}
+          </PresentImageDescription>
+          <PresentMedia media={activeMedia} imageLoaded={imageLoaded} />
+        </div>
       </PresentNavigationOverlay>
     </StyledContainer>
   )

@@ -6,19 +6,20 @@ import (
 
 type MediaEXIF struct {
 	Model
-	Camera          *string
-	Maker           *string
-	Lens            *string
-	DateShot        *time.Time
-	Exposure        *float64
-	Aperture        *float64
-	Iso             *int64
-	FocalLength     *float64
-	Flash           *int64
-	Orientation     *int64
-	ExposureProgram *int64
-	GPSLatitude     *float64
-	GPSLongitude    *float64
+	Camera           *string
+	Maker            *string
+	Lens             *string
+	DateShot         *time.Time
+	Exposure         *float64
+	Aperture         *float64
+	Iso              *int64
+	FocalLength      *float64
+	Flash            *int64
+	Orientation      *int64
+	ExposureProgram  *int64
+	GPSLatitude      *float64
+	GPSLongitude     *float64
+	ImageDescription *string
 }
 
 func (MediaEXIF) TableName() string {

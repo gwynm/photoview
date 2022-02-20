@@ -34,6 +34,9 @@ const SEARCH_QUERY = gql`
         album {
           id
         }
+        exif {
+          imageDescription
+        }
       }
     }
   }

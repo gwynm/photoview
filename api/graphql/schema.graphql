@@ -403,6 +403,8 @@ type MediaEXIF {
   exposureProgram: Int
   "GPS coordinates of where the image was taken"
   coordinates: Coordinates
+  "The image imageDescription"
+  imageDescription: String
 }
 
 type Coordinates {
