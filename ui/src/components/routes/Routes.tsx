@@ -38,6 +38,7 @@ const SharePageTokenRoute = React.lazy(() =>
   }))
 )
 
+
 const SettingsPage = React.lazy(
   () => import('../../Pages/SettingsPage/SettingsPage')
 )

@@ -2,31 +2,73 @@ import React from 'react'
 import AlbumBoxes from '../../components/albumGallery/AlbumBoxes'
 import Layout from '../../components/layout/Layout'
 import { useQuery, gql } from '@apollo/client'
-import { getMyAlbums } from '../AllAlbumsPage/__generated__/getMyAlbums'
+import {
+  myTimeline, myTimelineVariables
+} from '../../components/timelineGallery/__generated__/myTimeline'
 
-const getAlbumsQuery = gql`
-  query getMyAlbums {
-    myAlbums(order: { order_by: "title" }, onlyRoot: true, showEmpty: true) {
+/* Reuse timeline query to get all media */
+const MAX_PHOTOFRAME_SET_SIZE = 9999;
+const MY_TIMELINE_QUERY = gql`
+  query myTimeline(
+    $onlyFavorites: Boolean
+    $limit: Int
+    $offset: Int
+    $fromDate: Time
+  ) {
+    myTimeline(
+      onlyFavorites: $onlyFavorites
+      fromDate: $fromDate
+      paginate: { limit: $limit, offset: $offset }
+    ) {
       id
       title
+      type
+      blurhash
       thumbnail {
-        id
-        thumbnail {
-          url
-        }
+        url
+        width
+        height
       }
+      highRes {
+        url
+        width
+        height
+      }
+      videoWeb {
+        url
+      }
+      favorite
+      album {
+        id
+        title
+      }
+      exif {
+        imageDescription
+        dateShot
+      }
+      date
     }
   }
 `
 
+
 const PhotoframePage = () => {
-  const { error, data } = useQuery<getMyAlbums>(getAlbumsQuery)
+  const { data, error } = useQuery<
+    myTimeline,
+    myTimelineVariables
+  >(MY_TIMELINE_QUERY, {
+    variables: {
+      onlyFavorites: false,
+      fromDate: undefined,
+      offset: 0,
+      limit: MAX_PHOTOFRAME_SET_SIZE,
+    },
+  })
 
   return (
-    <Layout title="Albums">
-      <div>This is the photoframe page.</div>
-      <AlbumBoxes error={error} albums={data?.myAlbums} />
-    </Layout>
+    <div>
+      This is a list of all your media. We have {data?.myTimeline.length} items.
+    </div>
   )
 }
 
