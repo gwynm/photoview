@@ -1,5 +1,5 @@
 export function saveTokenCookie(token: string) {
-  const maxAge = 14 * 24 * 60 * 60
+  const maxAge = 999 * 24 * 60 * 60
 
   document.cookie = `auth-token=${token} ;max-age=${maxAge} ;path=/ ;sameSite=Lax`
 }
@@ -22,4 +22,13 @@ export function getSharePassword(shareToken: string) {
     `share-token-pw-${shareToken}=([\\d\\w]+)`
   )
   return match && match[1]
+}
+
+export function saveBouncedUrl(url: string) {
+  document.cookie = `bounced-url=${encodeURIComponent(url)} ;path=/ ;sameSite=Lax`
+}
+
+export function getBouncedUrl(): string | null {
+  const match = document.cookie.match(`bounced-url=([\\d\\w%]+)`);
+  return match && decodeURIComponent(match[1]);
 }
