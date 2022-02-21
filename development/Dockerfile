@@ -42,6 +42,11 @@ RUN go get -u github.com/cosmtrek/air
 # Install Delve debugger
 RUN go install github.com/go-delve/delve/cmd/dlv@latest
 
+# Runtime dependencies
+RUN apt install -y curl gpg libdlib19 ffmpeg exiftool libheif1
+# Install Darktable if building for a supported architecture
+RUN if [ "${TARGETPLATFORM}" = "linux/amd64" ] || [ "${TARGETPLATFORM}" = "linux/arm64" ]; then apt install -y darktable; fi
+
 ENV PHOTOVIEW_LISTEN_IP localhost
 ENV PHOTOVIEW_LISTEN_PORT 4001
 ENV REACT_APP_API_ENDPOINT http://localhost:4001/
