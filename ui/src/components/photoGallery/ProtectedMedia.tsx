@@ -185,13 +185,16 @@ export interface ProtectedVideoProps {
 
 export const ProtectedVideo = ({ media, ...props }: ProtectedVideoProps) => {
   if (isNil(media.videoWeb)) {
-    console.error('ProetctedVideo called with media.videoWeb = null')
+    console.error('ProtectedVideo called with media.videoWeb = null')
     return null
   }
 
   return (
     <video
       {...props}
+      autoPlay = {true} 
+      muted = {true} 
+      loop = {true}
       controls
       key={media.id}
       crossOrigin="use-credentials"
