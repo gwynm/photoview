@@ -78,7 +78,6 @@ const PhotoframePage = () => {
   })
 
   const switchPhoto = () => {
-    console.log('calling switchPhoto, data is', data);
     if (data && data.myTimeline && data.myTimeline.length > 0) {
       const newIndex = Math.floor(Math.random() * data.myTimeline.length);
       setCurrentPhotoIndex(newIndex);
@@ -86,7 +85,7 @@ const PhotoframePage = () => {
   }
 
   useEffect(() => {
-    const flipTimer = setInterval(switchPhoto, PHOTOFRAME_FLIP_MSEC);
+    const flipTimer = setInterval(() => {setCurrentPhotoIndex(undefined)}, PHOTOFRAME_FLIP_MSEC);
     return () => clearInterval(flipTimer);
   }, []);
 
