@@ -195,7 +195,7 @@ export const ProtectedVideo = ({ media, ...props }: ProtectedVideoProps) => {
       autoPlay = {true} 
       muted = {true} 
       loop = {true}
-      controls
+      controls = {false}
       key={media.id}
       crossOrigin="use-credentials"
       poster={getProtectedUrl(media.thumbnail?.url)}
