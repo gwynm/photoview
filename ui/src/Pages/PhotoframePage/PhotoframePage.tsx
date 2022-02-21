@@ -53,9 +53,21 @@ const MY_TIMELINE_QUERY = gql`
   }
 `
 
+type CachedPhotoProps = {
+  src: string
+}
+
+const CachedPhoto = ({ src }: CachedPhotoProps) => {
+  console.log('Caching', src);
+  return (
+    <img src={src} style={ { 'width': '5px', 'height': '5px' } } />
+  )
+}
+
 const PhotoframePage = () => {
 
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState<number | undefined>(undefined);
+  const [nextPhotoIndex, setNextPhotoIndex] = useState<number | undefined>(undefined);
 
   useEffect(() => {
     const reloadTimer = setTimeout(() => {
@@ -79,8 +91,11 @@ const PhotoframePage = () => {
 
   const switchPhoto = () => {
     if (data && data.myTimeline && data.myTimeline.length > 0) {
+      if (nextPhotoIndex) {
+        setCurrentPhotoIndex(nextPhotoIndex);
+      }
       const newIndex = Math.floor(Math.random() * data.myTimeline.length);
-      setCurrentPhotoIndex(newIndex);
+      setNextPhotoIndex(newIndex);
     }
   }
 
@@ -91,6 +106,7 @@ const PhotoframePage = () => {
 
   if (currentPhotoIndex === undefined) { switchPhoto()}
   const currentPhoto = currentPhotoIndex && data && data.myTimeline[currentPhotoIndex];
+  const nextPhoto = nextPhotoIndex && data && data.myTimeline[nextPhotoIndex];
 
   return (
     <div>
@@ -98,6 +114,7 @@ const PhotoframePage = () => {
         activeMedia={currentPhoto}
         dispatchMedia={() => null}
       />}
+      {nextPhoto && nextPhoto.highRes && <CachedPhoto src={nextPhoto.highRes.url} />}
     </div>
   )
 }
