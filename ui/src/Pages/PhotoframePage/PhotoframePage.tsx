@@ -7,8 +7,8 @@ import PresentView from '../../components/photoGallery/presentView/PresentView'
 
 /* Reuse timeline query to get all media */
 const MAX_PHOTOFRAME_SET_SIZE = 9999;
-const PHOTOFRAME_RELOAD_MSEC = 12 * 60 * 60 * 1000; //12 hours
-const PHOTOFRAME_FLIP_MSEC = 60 * 1000; //1 minute
+const PHOTOFRAME_RELOAD_MSEC = 15 * 1000; // 12 * 60 * 60 * 1000; //12 hours
+const PHOTOFRAME_FLIP_MSEC = 5 * 1000; // 60 * 1000; //1 minute
 
 const MY_TIMELINE_QUERY = gql`
   query myTimeline(
@@ -55,7 +55,7 @@ const MY_TIMELINE_QUERY = gql`
 
 const PhotoframePage = () => {
 
-  const [currentPhotoIndex, setCurrentPhotoIndex] = useState<number>(0);
+  const [currentPhotoIndex, setCurrentPhotoIndex] = useState<number | undefined>(undefined);
 
   useEffect(() => {
     const reloadTimer = setTimeout(() => {
@@ -77,20 +77,24 @@ const PhotoframePage = () => {
     },
   })
 
+  const switchPhoto = () => {
+    console.log('calling switchPhoto, data is', data);
+    if (data && data.myTimeline && data.myTimeline.length > 0) {
+      const newIndex = Math.floor(Math.random() * data.myTimeline.length);
+      setCurrentPhotoIndex(newIndex);
+    }
+  }
+
   useEffect(() => {
-    const flipTimer = setInterval(() => {
-      if (data?.myTimeline) {
-        const newIndex = Math.floor(Math.random() * data.myTimeline.length);
-        setCurrentPhotoIndex(newIndex);
-      }
-    }, PHOTOFRAME_FLIP_MSEC);
+    const flipTimer = setInterval(switchPhoto, PHOTOFRAME_FLIP_MSEC);
     return () => clearInterval(flipTimer);
   }, []);
 
-  const currentPhoto = data && data.myTimeline[currentPhotoIndex];
+  if (currentPhotoIndex === undefined) { switchPhoto()}
+  const currentPhoto = currentPhotoIndex && data && data.myTimeline[currentPhotoIndex];
+
   return (
     <div>
-      This is a list of all your media. We have {data?.myTimeline.length} items.
       {currentPhoto && <PresentView
         activeMedia={currentPhoto}
         dispatchMedia={() => null}
