@@ -13,13 +13,15 @@ services:
       - db_data:/var/lib/mysql
 
   photoview:
-    image: viktorstrate/photoview:2
+    image: gwynm/photoview:latest
     restart: always
     ports:
       - "8000:80"
     depends_on:
       - db
-
+      - watchtower
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
     environment:
       - PHOTOVIEW_DATABASE_DRIVER=mysql
       - PHOTOVIEW_MYSQL_URL=photoview:photosecret@tcp(db)/photoview
@@ -45,6 +47,16 @@ services:
       # to the following: `/home/user/photos:/photos:ro`.
       # You can mount multiple paths, if your photos are spread across multiple directories.
       - ./photos_path:/photos:ro
+
+  watchtower:
+    command: --label-enable --cleanup --interval 300
+    image: containrrr/watchtower
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+    network_mode: none
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
 
 volumes:
   db_data:
