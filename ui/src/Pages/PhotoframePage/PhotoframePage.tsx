@@ -7,8 +7,8 @@ import PresentView from '../../components/photoGallery/presentView/PresentView'
 
 /* Reuse timeline query to get all media */
 const MAX_PHOTOFRAME_SET_SIZE = 9999;
-const PHOTOFRAME_RELOAD_MSEC = 15 * 1000; // 12 * 60 * 60 * 1000; //12 hours
-const PHOTOFRAME_FLIP_MSEC = 5 * 1000; // 60 * 1000; //1 minute
+const PHOTOFRAME_RELOAD_MSEC = 12 * 60 * 60 * 1000; //12 hours
+const PHOTOFRAME_FLIP_MSEC = 60 * 1000; //1 minute
 
 const MY_TIMELINE_QUERY = gql`
   query myTimeline(
