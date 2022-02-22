@@ -102,11 +102,15 @@ func (p *externalExifParser) ParseExif(media_path string) (returnExif *models.Me
 		newExif.Lens = &lens
 	}
 
-	// Get imageDescription
-	imageDescription, err := fileInfo.GetString("ImageDescription")
-	if err == nil {
-		found_exif = true
-		newExif.ImageDescription = &imageDescription
+	// Get imageDescription. For videos, this is sometimes in the Description field instead.
+	descKeys := []string{"ImageDescription", "Description"}
+	for _, descKey := range descKeys {
+		desc, err := fileInfo.GetString(descKey)
+		if err == nil && desc != "" {
+			found_exif = true
+			newExif.ImageDescription = &desc
+			break
+		}
 	}
 
 	//Get time of photo
