@@ -175,6 +175,7 @@ export interface SharePageToken_shareToken_media {
    */
   videoWeb: SharePageToken_shareToken_media_videoWeb | null;
   exif: SharePageToken_shareToken_media_exif | null;
+  blurhash: string | null;
 }
 
 export interface SharePageToken_shareToken {

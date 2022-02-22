@@ -264,6 +264,7 @@ export interface MediaSidebarMedia {
     title: string
     path?: sidebarMediaQuery_media_album_path[]
   }
+  blurhash: string | null
 }
 
 type MediaSidebarType = {

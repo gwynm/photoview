@@ -239,6 +239,7 @@ export interface sidebarMediaQuery_media {
    * A list of faces present on the image
    */
   faces: sidebarMediaQuery_media_faces[];
+  blurhash: string | null;
 }
 
 export interface sidebarMediaQuery {

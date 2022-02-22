@@ -185,6 +185,7 @@ export interface ProtectedVideoProps_Media {
     __typename: 'MediaURL'
     url: string
   }
+  blurhash: string | null
 }
 
 export interface ProtectedVideoProps {
@@ -198,17 +199,26 @@ export const ProtectedVideo = ({ media, ...props }: ProtectedVideoProps) => {
   }
 
   return (
-    <video
-      {...props}
-      autoPlay = {true} 
-      muted = {true} 
-      loop = {true}
-      controls = {false}
-      key={media.id}
-      crossOrigin="use-credentials"
-      poster={getProtectedUrl(media.thumbnail?.url)}
-    >
-      <source src={getProtectedUrl(media.videoWeb.url)} type="video/mp4" />
-    </video>
+    <>
+      {media.blurhash && (
+        <BlurhashCanvas
+          className="absolute w-full h-full top-0"
+          hash={media.blurhash}
+        />
+      )}
+      <video
+        {...props}
+        style = {{zIndex: 1}}
+        autoPlay = {true} 
+        muted = {true} 
+        loop = {true}
+        controls = {false}
+        key={media.id}
+        crossOrigin="use-credentials"
+        poster={getProtectedUrl(media.thumbnail?.url)}
+      >
+        <source src={getProtectedUrl(media.videoWeb.url)} type="video/mp4" />
+      </video>
+    </>
   )
 }
