@@ -18,11 +18,15 @@ const StyledContainer = styled.div`
 const PresentImageDescription = styled.div`
   position: absolute;
   bottom: 0;
+  border-radius: 0.3em;
   width: 100%;
-  background-color:rgba(0,0,0,0.3);
+  padding-bottom: 1em; /* Physical frame overlaps this */
+  background-color:rgba(0,0,0,0.6);
   color:#ffffff;
   text-align:center;
   z-index:10;
+  color: white;
+  font-size: 2em;
 `
 
 
