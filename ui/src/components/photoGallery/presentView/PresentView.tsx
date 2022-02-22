@@ -20,13 +20,12 @@ const PresentImageDescription = styled.div`
   bottom: 0;
   border-radius: 0.3em;
   width: 100%;
-  padding-bottom: 1em; /* Physical frame overlaps this */
   background-color:rgba(0,0,0,0.6);
   color:#ffffff;
   text-align:center;
   z-index:10;
   color: white;
-  font-size: 2em;
+  font-size: 1.2em;
 `
 
 
