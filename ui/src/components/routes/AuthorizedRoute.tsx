@@ -1,7 +1,7 @@
 import { useLazyQuery } from '@apollo/client'
 import React, { useEffect } from 'react'
 import { Navigate } from 'react-router-dom'
-import { authToken, saveBouncedUrl } from '../../helpers/authentication'
+import { authToken, getBouncedPath, saveBouncedPath } from '../../helpers/authentication'
 import { ADMIN_QUERY } from '../layout/Layout'
 
 export const useIsAdmin = () => {
@@ -32,13 +32,17 @@ interface AuthorizedRouteProps {
 
 const AuthorizedRoute = ({ children }: AuthorizedRouteProps) => {
   const token = authToken()
-
+  const bouncedPath = getBouncedPath();
+  
   if (!token) {
-    saveBouncedUrl(window.location.href);
+    saveBouncedPath(window.location.pathname);
     return <Navigate to="/" />
+  } else if (bouncedPath) {
+    saveBouncedPath('');
+    return <Navigate to={bouncedPath} />
+  } else {
+    return <>{children}</>
   }
-
-  return <>{children}</>
 }
 
 export default AuthorizedRoute

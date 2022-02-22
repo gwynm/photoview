@@ -24,11 +24,11 @@ export function getSharePassword(shareToken: string) {
   return match && match[1]
 }
 
-export function saveBouncedUrl(url: string) {
-  document.cookie = `bounced-url=${encodeURIComponent(url)} ;path=/ ;sameSite=Lax`
+export function saveBouncedPath(path: string) {
+  document.cookie = `bounced-path=${encodeURIComponent(path)} ;path=/ ;sameSite=Lax`
 }
 
-export function getBouncedUrl(): string | null {
-  const match = document.cookie.match(`bounced-url=([\\d\\w%]+)`);
+export function getBouncedPath(): string | null {
+  const match = document.cookie.match(`bounced-path=([\\d\\w%\\.]+)`);
   return match && decodeURIComponent(match[1]);
 }

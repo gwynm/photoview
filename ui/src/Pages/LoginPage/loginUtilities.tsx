@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client'
-import { saveTokenCookie, getBouncedUrl, saveBouncedUrl } from '../../helpers/authentication'
+import { saveTokenCookie } from '../../helpers/authentication'
 import styled from 'styled-components'
 
 export const INITIAL_SETUP_QUERY = gql`
@@ -12,9 +12,7 @@ export const INITIAL_SETUP_QUERY = gql`
 
 export function login(token: string) {
   saveTokenCookie(token)
-  const newUrl = getBouncedUrl();
-  saveBouncedUrl('/');
-  window.location.href = newUrl || '/';
+  window.location.href = '/'
 }
 
 export const Container = styled.div.attrs({ className: 'mt-20' })``
