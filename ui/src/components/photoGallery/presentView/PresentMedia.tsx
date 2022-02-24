@@ -54,12 +54,14 @@ const PresentMedia = ({
             key={`${media.id}-thumb`}
             src={media.thumbnail?.url}
             data-testid="present-img-thumbnail"
+            includeBlurredBackground={true}
           />
           <StyledPhoto
             key={`${media.id}-highres`}
             style={{ display: 'none' }}
             src={media.highRes?.url}
             data-testid="present-img-highres"
+            includeBlurredBackground={true}
             onLoad={e => {
               const elem = e.target as HTMLImageElement
               elem.style.display = 'initial'

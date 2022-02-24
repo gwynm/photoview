@@ -32,6 +32,7 @@ export interface ProtectedImageProps
   src?: string
   key?: string
   lazyLoading?: boolean
+  includeBlurredBackground?: boolean
   blurhash?: string | null
 }
 
@@ -44,6 +45,7 @@ export interface ProtectedImageProps
 export const ProtectedImage = ({
   src,
   lazyLoading,
+  includeBlurredBackground,
   blurhash,
   ...props
 }: ProtectedImageProps) => {
@@ -57,11 +59,11 @@ export const ProtectedImage = ({
     return (
       <>
         <img {...props} style={{zIndex: 1}} src={url} loading="eager" crossOrigin="use-credentials" />
-        <img
+        {includeBlurredBackground && <img
         {...props}
         src={url}
         style={{filter: "blur(30px)", objectFit: "cover"}}
-        />
+        />}
       </>
     )
   }
