@@ -1,6 +1,7 @@
 #!/usr/bin/ruby
 
-#Run from Automator, after an Album Export action
+#Run from Automator, after an Album Export action. Does a full sync: expects that everything in the
+#album was exported, and removes things from PhotoView if they weren't.
 require 'date'
 require 'fileutils'
 require 'shellwords'
